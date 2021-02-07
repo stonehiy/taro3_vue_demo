@@ -1,3 +1,5 @@
+const path = require("path")
+
 const config = {
   projectName: 'taro3_vue_demo',
   date: '2021-2-5',
@@ -9,6 +11,15 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  alias: {
+    // '@/servers': path.resolve(__dirname, '..', 'src/servers'),
+    // '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+    // '@/components': path.resolve(__dirname, '..', 'src/components'),
+    // '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/src': path.resolve(__dirname, '..', 'src'),
+    '@/package': path.resolve(__dirname, '..', 'package.json'),
+    '@/project': path.resolve(__dirname, '..', 'project.config.json'),
+  },
   plugins: [],
   defineConstants: {
   },

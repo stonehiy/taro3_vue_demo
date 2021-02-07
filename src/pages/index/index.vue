@@ -6,7 +6,9 @@
 
 <script>
 import "./index.scss";
-import { getWxarticleChaptersJson } from "./../../servers/servers";
+import { getWxarticleChaptersJson } from "@/src/servers/servers";
+
+
 
 export default {
   data() {
