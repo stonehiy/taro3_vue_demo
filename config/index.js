@@ -1,6 +1,5 @@
 const path = require("path")
 
-const taro_env = process.env.TARO_ENV
 
 const config = {
   projectName: 'taro3_vue_demo',
@@ -12,7 +11,7 @@ const config = {
     828: 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: 'dist-'+taro_env,
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   alias: {
     // '@/servers': path.resolve(__dirname, '..', 'src/servers'),
     // '@/pages': path.resolve(__dirname, '..', 'src/pages'),
