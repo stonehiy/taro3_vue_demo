@@ -1,6 +1,38 @@
 <template>
   <view class="index">
-    <text>{{ msg }}</text>
+    <!-- <text>{{ msg }}</text> -->
+    <icon size="60" type="success" />
+    <icon size="60" type="info" />
+    <icon size="60" type="warn" color="#ccc" />
+    <icon size="60" type="warn" />
+    <icon size="60" type="waiting" />
+    <icon size="20" type="success_no_circle" />
+    <icon size="20" type="warn" />
+    <icon size="20" type="success" />
+    <icon size="20" type="download" />
+    <icon size="20" type="clear" color="red" />
+    <icon size="20" type="search" />
+
+    <button
+      v-for="item in btn"
+      :size="item.size ? item.size : ''"
+      :type="item.type ? item.type : ''"
+      :loading="item.loading ? item.loading : false"
+      :disabled="item.disabled ? item.disabled : false"
+      :key="item.id"
+    
+    >
+      {{ item.text }}
+    </button>
+    <button class="btn-max-w" plain type="primary">按钮</button>
+    <button class="btn-max-w" plain type="primary" disabled="true">
+      不可点击的按钮
+    </button>
+    <button class="btn-max-w" plain>按钮</button>
+    <button class="btn-max-w" plain disabled="true">按钮</button>
+    <button size="mini" type="primary">按钮</button>
+    <button size="mini">按钮</button>
+    <button size="mini" type="warn">按钮</button>
   </view>
 </template>
 
@@ -8,12 +40,51 @@
 import "./index.scss";
 import { getWxarticleChaptersJson } from "@/src/servers/servers";
 
-
-
 export default {
   data() {
     return {
-      msg: "Hello world!"
+      msg: "Hello world!",
+       btn: [
+        {
+          text: '页面主操作 Normal',
+          size: 'default',
+          type: 'primary'
+        },
+        {
+          text: '页面主操作 Loading',
+          size: 'default',
+          type: 'primary',
+          loading: true,
+        },
+        {
+          text: '页面主操作 Disabled',
+          size: 'default',
+          type: 'primary',
+          disabled: true,
+        },
+        {
+          text: '页面次要操作 Normal',
+          size: 'default',
+          type: 'default'
+        },
+        {
+          text: '页面次要操作 Disabled',
+          size: 'default',
+          type: 'default',
+          disabled: true,
+        },
+        {
+          text: '警告类操作 Normal',
+          size: 'default',
+          type: 'warn'
+        },
+        {
+          text: '警告类操作 Disabled',
+          size: 'default',
+          type: 'warn',
+          disabled: true,
+        }
+      ]
     };
   },
 
@@ -80,15 +151,13 @@ export default {
 
   methods: {
     getData() {
-       let that = this
+      let that = this;
       getWxarticleChaptersJson()
-      .then(res=>{
-        that.msg = res
-        console.log(res)
-      })
-      .catch(err=>{
-
-      })
+        .then(res => {
+          that.msg = res;
+          console.log(res);
+        })
+        .catch(err => {});
     }
   }
 };
