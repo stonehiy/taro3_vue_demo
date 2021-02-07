@@ -5,13 +5,89 @@
 </template>
 
 <script>
-import './index.scss'
+import "./index.scss";
+import { getWxarticleChaptersJson } from "./../../servers/servers";
 
 export default {
-  data () {
+  data() {
     return {
-      msg: 'Hello world!'
+      msg: "Hello world!"
+    };
+  },
+
+  /**
+   * 页面创建时执行，此生命周期在小程序端对应小程序页面的 onLoad 生命周期。此生命周期可以访问 getCurrentInstance().router
+   */
+  onLoad(options) {
+    console.log("onLoad options = ", options);
+  },
+  /**
+   * 页面加载时触发，一个页面只会调用一次，此时页面 DOM 尚未准备好，还不能和视图层进行交互
+   */
+  onCreate() {
+    console.log("onCreate...");
+  },
+
+  /**
+   * 页面初次渲染完成时触发，一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互
+   */
+  mounted() {
+    console.log("mounted...");
+    this.getData();
+  },
+
+  /**
+   * 页面即将更新
+   */
+  beforeUpdate() {
+    console.log("beforeUpdate...");
+  },
+  /**
+   * 页面更新完毕
+   */
+  updated() {
+    console.log("updated...");
+  },
+  /**
+   * 页面卸载时触发，如 redirectTo 或 navigateBack 到其他页面时
+   */
+  beforeDestroy() {
+    console.log("beforeDestroy...");
+  },
+
+  /**
+   * 页面显示/切入前台时触发
+   */
+  onShow() {
+    console.log("onShow...");
+  },
+
+  /**
+   * 页面隐藏/切入后台时触发， 如 navigateTo 或底部 tab 切换到其他页面，小程序切入后台等
+   */
+  onHide() {
+    console.log("onHide...");
+  },
+
+  /**
+   * 监听用户下拉刷新事件
+   */
+  onPullDownRefresh() {
+    console.log("onPullDownRefresh...");
+  },
+
+  methods: {
+    getData() {
+       let that = this
+      getWxarticleChaptersJson()
+      .then(res=>{
+        that.msg = res
+        console.log(res)
+      })
+      .catch(err=>{
+
+      })
     }
   }
-}
+};
 </script>
