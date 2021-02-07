@@ -1,5 +1,7 @@
 const path = require("path")
 
+const taro_env = process.env.TARO_ENV
+
 const config = {
   projectName: 'taro3_vue_demo',
   date: '2021-2-5',
@@ -10,7 +12,7 @@ const config = {
     828: 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: 'dist-'+taro_env,
   alias: {
     // '@/servers': path.resolve(__dirname, '..', 'src/servers'),
     // '@/pages': path.resolve(__dirname, '..', 'src/pages'),
@@ -76,6 +78,8 @@ const config = {
 module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
     return merge({}, config, require('./dev'))
+  }else if(process.env.NODE_ENV === 'local'){
+    return merge({}, config, require('./local'))
   }
   return merge({}, config, require('./prod'))
 }
