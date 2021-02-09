@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import './app.scss'
 
+
 const App = new Vue({
   onShow (options) {
   },
@@ -10,4 +11,6 @@ const App = new Vue({
   }
 })
 
+
 export default App
+

@@ -13,76 +13,63 @@
     <icon size="20" type="clear" color="red" />
     <icon size="20" type="search" />
 
-    <button
-      v-for="item in btn"
-      :size="item.size ? item.size : ''"
-      :type="item.type ? item.type : ''"
-      :loading="item.loading ? item.loading : false"
-      :disabled="item.disabled ? item.disabled : false"
-      :key="item.id"
-    
-    >
-      {{ item.text }}
+    <button class="btn-max-w" plain type="primary" @tap="toTaroUI()">
+      按钮
     </button>
-    <button class="btn-max-w" plain type="primary">按钮</button>
-    <button class="btn-max-w" plain type="primary" disabled="true">
-      不可点击的按钮
-    </button>
-    <button class="btn-max-w" plain>按钮</button>
-    <button class="btn-max-w" plain disabled="true">按钮</button>
-    <button size="mini" type="primary">按钮</button>
-    <button size="mini">按钮</button>
-    <button size="mini" type="warn">按钮</button>
   </view>
 </template>
 
 <script>
 import "./index.scss";
+import Taro from '@tarojs/taro'
 import { getWxarticleChaptersJson } from "@/src/servers/servers";
 
 export default {
+  config:{
+      navigationBarTitleText: '首页1'
+  },
   data() {
     return {
       msg: "Hello world!",
-       btn: [
+      btn: [
         {
-          text: '页面主操作 Normal',
-          size: 'default',
-          type: 'primary'
+          text: "页面主操作 Normal",
+          size: "default",
+          type: "primary"
         },
         {
-          text: '页面主操作 Loading',
-          size: 'default',
-          type: 'primary',
-          loading: true,
+          text: "页面主操作 Loading",
+          size: "default",
+          type: "primary",
+          loading: true
         },
         {
-          text: '页面主操作 Disabled',
-          size: 'default',
-          type: 'primary',
-          disabled: true,
+          text: "页面主操作 Disabled",
+          size: "default",
+          type: "primary",
+          disabled: true
         },
         {
-          text: '页面次要操作 Normal',
-          size: 'default',
-          type: 'default'
+          text: "页面次要操作 Normal",
+          size: "default",
+          type: "default"
         },
         {
-          text: '页面次要操作 Disabled',
-          size: 'default',
-          type: 'default',
-          disabled: true,
+          text: "页面次要操作 Disabled",
+          size: "default",
+          type: "default",
+          disabled: true
         },
         {
-          text: '警告类操作 Normal',
-          size: 'default',
-          type: 'warn'
+          text: "警告类操作 Normal",
+          size: "default",
+          type: "warn"
         },
         {
-          text: '警告类操作 Disabled',
-          size: 'default',
-          type: 'warn',
-          disabled: true,
+          text: "警告类操作 Disabled",
+          size: "default",
+          type: "warn",
+          disabled: true
         }
       ]
     };
@@ -158,6 +145,29 @@ export default {
           console.log(res);
         })
         .catch(err => {});
+    },
+
+    toTaroUI() {
+      Taro.navigateTo({
+        url: "/pages/taroui/taroui?id=1",
+        events: {
+          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+          acceptDataFromOpenedPage: function(data) {
+            console.log(data);
+          },
+          someEvent: function(data) {
+            console.log(data);
+          }
+        },
+        // success: function(res) {
+        //   // 通过eventChannel向被打开页面传送数据
+        //   res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
+        // }
+      }).then(res=>{
+         // 通过eventChannel向被打开页面传送数据
+          res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
+
+      })
     }
   }
 };
