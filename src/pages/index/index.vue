@@ -16,18 +16,19 @@
     <button class="btn-max-w" plain type="primary" @tap="toTaroUI()">
       按钮
     </button>
+
+    <button class="btn-max-w" plain type="primary" @tap="getData()">
+      网络请求
+    </button>
   </view>
 </template>
 
 <script>
 import "./index.scss";
-import Taro from '@tarojs/taro'
+import Taro from "@tarojs/taro";
 import { getWxarticleChaptersJson } from "@/src/servers/servers";
 
 export default {
-  config:{
-      navigationBarTitleText: '首页1'
-  },
   data() {
     return {
       msg: "Hello world!",
@@ -93,7 +94,7 @@ export default {
    */
   mounted() {
     console.log("mounted...");
-    this.getData();
+    // this.getData();
   },
 
   /**
@@ -139,12 +140,14 @@ export default {
   methods: {
     getData() {
       let that = this;
-      getWxarticleChaptersJson()
+      getWxarticleChaptersJson({ loading: false })
         .then(res => {
           that.msg = res;
           console.log(res);
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     },
 
     toTaroUI() {
@@ -158,16 +161,15 @@ export default {
           someEvent: function(data) {
             console.log(data);
           }
-        },
+        }
         // success: function(res) {
         //   // 通过eventChannel向被打开页面传送数据
         //   res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
         // }
-      }).then(res=>{
-         // 通过eventChannel向被打开页面传送数据
-          res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
-
-      })
+      }).then(res => {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
+      });
     }
   }
 };
