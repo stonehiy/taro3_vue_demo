@@ -140,7 +140,7 @@ export default {
   methods: {
     getData() {
       let that = this;
-      getWxarticleChaptersJson({ loading: false })
+      getWxarticleChaptersJson()
         .then(res => {
           that.msg = res;
           console.log(res);

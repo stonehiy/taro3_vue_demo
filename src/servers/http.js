@@ -17,9 +17,6 @@ function hideLoading() {
 class httpRequest {
   baseOptions(params, method = "GET") {
     let { url, data } = params;
-    // if (params.loading) {
-    //   showLoading();
-    // }
     const BASE_URL = getBaseUrl(url);
     let contentType = "application/json";
     contentType = params.contentType || contentType;
@@ -49,22 +46,34 @@ class httpRequest {
       });
   }
 
-  get(url, data = "") {
+  get({url, data = "",loading=true}) {
     let option = { url, data };
+    if(loading){
+      showLoading();
+    }
     return this.baseOptions(option);
   }
 
-  post(url, data, contentType) {
+  post({url, data, contentType,loading = true}) {
+    if(loading){
+      showLoading();
+    }
     let params = { url, data, contentType };
     return this.baseOptions(params, "POST");
   }
 
-  put(url, data = "") {
+  put({url, data = "",loading = true}) {
+    if(loading){
+      showLoading();
+    }
     let option = { url, data };
     return this.baseOptions(option, "PUT");
   }
 
-  delete(url, data = "") {
+  delete({url, data = "",loading = true}) {
+    if(loading){
+      showLoading();
+    }
     let option = { url, data };
     return this.baseOptions(option, "DELETE");
   }

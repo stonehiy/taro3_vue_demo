@@ -6,5 +6,5 @@ import HTTPREQUEST from "./http"
 // }
 
 export const getWxarticleChaptersJson = (getData) => {
-  return HTTPREQUEST.get('/wxarticle/chapters/json', getData)
+  return HTTPREQUEST.get({url:'/wxarticle/chapters/json', data:getData}) 
 }
